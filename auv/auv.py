@@ -96,6 +96,11 @@ class AutonomousUnderwaterVehicle:
         ax.scatter3D(trajectory[0, 0], trajectory[1, 0], trajectory[2, 0], 'o')
         ax.scatter3D(trajectory[0, -1], trajectory[1, -1], trajectory[2, -1], 'o')
 
+        plt.xlabel('x [m]')
+        plt.ylabel('y [m]')
+
+        plt.title('Position in R3')
+
         for index in range(len(time)):
             ax.plot3D([trajectory[0, 0], trajectory[0, index]], [trajectory[1, 0], trajectory[1, index]],
                       [trajectory[2, 0], trajectory[2, index]], '--r')
@@ -161,6 +166,7 @@ class AutonomousUnderwaterVehicle:
         plt.plot(time, ax)
         plt.plot(time, ay)
         plt.plot(time, az)
+
         plt.grid(True)
         plt.savefig('../results/auv/accelerations.png')
 
