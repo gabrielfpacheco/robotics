@@ -19,15 +19,20 @@ The goal is to evolve this repository with new algorithms and applications for d
 
     > cd robotics/auv/
 
-2. Install the required libraries. You can use environment.yml with conda command.
+2. Install the required libraries. You can use environment.yml with conda command. If Windows, do it from 
+Anaconda Prompt
 
     > conda env create -f environment.yml
+    
+3. Activate the environment. If Windows, do it from Anaconda Prompt
+    
+    > conda activate robotics
 
-3. Execute the main.py script inside the directory.
+4. Execute the main.py script inside the directory.
 
     > python main.py
 
-4. The unit tests will be performed and an example will be plotted.
+5. The unit tests will be performed and an example will be plotted.
 
 
 # Results
