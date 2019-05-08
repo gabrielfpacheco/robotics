@@ -58,6 +58,8 @@ Anaconda Prompt
 
 ### Acceleration profiles over time (per axis) and the vector norm:
 
+#### Per axis:
+
 ![accelerations_axes](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/accelerations.png)
 
 #### Vector norm - Absolute values only:
