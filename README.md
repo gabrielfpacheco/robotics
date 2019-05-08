@@ -32,18 +32,29 @@ The goal is to evolve this repository with new algorithms and applications for d
 
 # Results
 
-1. 3D animation for displacement from an initial position to a final one:
+### 3D animation for displacement from an initial position to a final one:
 
-2. Position profiles over time (per axis):
+![plot3d](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/3d_position.gif)
 
-3. Velocity profiles over time:
+### Position profiles over time (per axis):
     
-    a. Per axis:
-    
-    b. Vector norm:
+![positions_axes](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/positions.png)
 
-4. Acceleration profiles over time (per axis) and the vector norm:
-
-    a. Per axis:
+### Velocity profiles over time:
+   
+#### Per axis:
     
-    b. Vector norm:
+![velocities_axes](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/velocities.png)
+
+#### Vector norm - Absolute values only:
+
+![velocities_norm](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/velocity_norm.png)
+
+
+### Acceleration profiles over time (per axis) and the vector norm:
+
+![velocities_axes](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/accelerations.png)
+
+#### Vector norm - Absolute values only:
+
+![velocities_norm](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/acceleration_norm.png)
