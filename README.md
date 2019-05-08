@@ -1,6 +1,6 @@
-# Python Robotics Algorithm
+# Robotics - Trajectory Generation
 
-This repository contains an initial version of a path planning algorithm based on a desired trapezoidal velocity profile
+This repository contains an initial version of a trajectory algorithm based on a desired trapezoidal velocity profile
 considering two given collision-free way-points in a confined space (R3) for an autonomous underwater vehicle (AUV). 
 The goal is to evolve this repository with new algorithms and applications for different types of problems and robots.  
 
