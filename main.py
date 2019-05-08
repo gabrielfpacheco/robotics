@@ -1,6 +1,5 @@
 import numpy as np
 from auv.autonomous_underwater_vehicle import AutonomousUnderwaterVehicle
-import unit_tests
 
 
 def main():
