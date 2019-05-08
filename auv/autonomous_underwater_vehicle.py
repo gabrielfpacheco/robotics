@@ -42,7 +42,7 @@ class AutonomousUnderwaterVehicle:
         :return: boolean returning True if the point is within limits and False if not
         """
 
-        is_within_height = position[-1] <= self.__tank_height
+        is_within_height = 0 <= position[-1] <= self.__tank_height
         is_within_circle = np.sqrt(position[0] ** 2 + position[1] ** 2) <= self.__tank_radius
 
         return is_within_height and is_within_circle
