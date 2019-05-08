@@ -21,12 +21,12 @@ def main():
     # Test 2
     p2 = np.array([8, 5, 13])[:, np.newaxis]
 
-    p_vec, t_vec = auv.generate_splines_from_trapezoidal_profile(p1, p2, 25)
+    # p_vec, t_vec = auv.generate_splines_from_trapezoidal_profile(p1, p2, 25)
 
-    auv.plot_3d_trajectory(p_vec, t_vec)
-    auv.plot_position_profiles(p_vec, t_vec)
-    auv.plot_velocity_profiles(p_vec, t_vec)
-    auv.plot_acceleration_profiles(p_vec, t_vec)
+    # auv.plot_3d_trajectory(p_vec, t_vec)
+    # auv.plot_position_profiles(p_vec, t_vec)
+    # auv.plot_velocity_profiles(p_vec, t_vec)
+    # auv.plot_acceleration_profiles(p_vec, t_vec)
 
     print("End of program")
 #####
