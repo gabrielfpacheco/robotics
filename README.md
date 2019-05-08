@@ -7,7 +7,7 @@ The goal is to evolve this repository with new algorithms and applications for d
 
 # Requirements
 
-- Python 3.7.x (2.7 is not supported)
+- Python 3.7.x 
 - numpy
 - matplotlib
 
@@ -53,8 +53,8 @@ The goal is to evolve this repository with new algorithms and applications for d
 
 ### Acceleration profiles over time (per axis) and the vector norm:
 
-![velocities_axes](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/accelerations.png)
+![accelerations_axes](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/accelerations.png)
 
 #### Vector norm - Absolute values only:
 
-![velocities_norm](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/acceleration_norm.png)
+![accelerations_norm](https://github.com/gabrielfpacheco/robotics/raw/master/results/auv/acceleration_norm.png)

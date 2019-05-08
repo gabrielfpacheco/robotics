@@ -91,7 +91,7 @@ class AutonomousUnderwaterVehicle:
         """
 
         interval = np.diff(time)[0]
-        fig = plt.figure()
+        plt.figure()
         ax = plt.axes(projection='3d')
         ax.scatter3D(trajectory[0, 0], trajectory[1, 0], trajectory[2, 0], 'o')
         ax.scatter3D(trajectory[0, -1], trajectory[1, -1], trajectory[2, -1], 'o')
