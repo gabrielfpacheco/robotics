@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits import mplot3d
+from mpl_toolkits.mplot3d import Axes3D
 from auv.trapezoidal_profile import TrapezoidalProfile
 
 
@@ -82,8 +82,7 @@ class AutonomousUnderwaterVehicle:
 
         return splines, time
 
-    @staticmethod
-    def plot_3d_trajectory(trajectory, time, show_animation=True):
+    def plot_3d_trajectory(self, trajectory, time, show_animation=True):
         """
         Plots an animation of how the AUV's position evolves over time. The acceleration, constant velocity and
         deceleration phases can be remarked during the animation.
@@ -103,7 +102,17 @@ class AutonomousUnderwaterVehicle:
         plt.ylabel('y [m]')
         ax.set_zlabel('z [m]')
 
+        theta = np.linspace(0, 2 * np.pi, 100)
+        x_tank = self.__tank_radius * np.cos(theta)
+        y_tank = self.__tank_radius * np.sin(theta)
+        z_tank = np.linspace(0, self.__tank_height, 100)
+        x_tank, z_tank = np.meshgrid(x_tank, z_tank)
+
+        ax.plot_surface(x_tank, y_tank, z_tank, alpha=0.2, rstride=20, cstride=10)
+        plt.axis('equal')
         plt.title('3D trajectory over time')
+        plt.xlim(-self.__tank_radius*1.5, self.__tank_radius*1.5)
+        plt.ylim(-self.__tank_radius*1.5, self.__tank_radius*1.5)
 
         if show_animation:
             for index in range(len(time)):

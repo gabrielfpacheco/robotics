@@ -8,11 +8,11 @@ def main():
     auv = AutonomousUnderwaterVehicle(6, 3)
 
     # Initial and final positions - these would be provided by the library that generates collision-free way-points
-    initial_point = np.array([1, -5, 3])[:, np.newaxis]
-    final_point = np.array([6, 8, 12])[:, np.newaxis]
+    initial_point = np.array([-5, -3, 0])[:, np.newaxis]
+    final_point = np.array([6, 5, 9])[:, np.newaxis]
 
     # In order to test the triangular profile one could use the following destination point:
-    # final_point = np.array([2, 0, 4])[:, np.newaxis]
+    # final_point = np.array([-2, 0, 4])[:, np.newaxis]
 
     # Generating splines for each axis over time
     trajectory, time_vector = auv.generate_splines_from_trapezoidal_profile(initial_point, final_point)
