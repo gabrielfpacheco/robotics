@@ -98,8 +98,9 @@ class AutonomousUnderwaterVehicle:
 
         plt.xlabel('x [m]')
         plt.ylabel('y [m]')
+        ax.set_zlabel('z [m]')
 
-        plt.title('Position in R3')
+        plt.title('3D trajectory over time')
 
         for index in range(len(time)):
             ax.plot3D([trajectory[0, 0], trajectory[0, index]], [trajectory[1, 0], trajectory[1, index]],
@@ -118,11 +119,16 @@ class AutonomousUnderwaterVehicle:
         """
 
         plt.figure()
-        plt.plot(time, trajectory[0], ':.')
-        plt.plot(time, trajectory[1], ':.')
-        plt.plot(time, trajectory[2], ':.')
+        plt.xlabel('time[s]')
+        plt.ylabel('displacement [m]')
+
+        plot_x, = plt.plot(time, trajectory[0], ':.', label='x-axis')
+        plot_y, = plt.plot(time, trajectory[1], ':.', label='y-axis')
+        plot_z, = plt.plot(time, trajectory[2], ':.', label='z-axis')
         plt.grid(True)
+        plt.legend(handles=[plot_x, plot_y, plot_z])
         plt.savefig('../results/auv/positions.png')
+        plt.show()
 
     @staticmethod
     def plot_velocity_profiles(trajectory, time):
@@ -138,16 +144,26 @@ class AutonomousUnderwaterVehicle:
         v = np.sqrt(vx ** 2 + vy ** 2 + vz ** 2)
 
         plt.figure()
-        plt.plot(time, vx)
-        plt.plot(time, vy)
-        plt.plot(time, vz)
+        plt.xlabel('time[s]')
+        plt.ylabel('velocity [m/s]')
+
+        plot_x, = plt.plot(time, vx, label='x-axis')
+        plot_y, = plt.plot(time, vy, label='y-axis')
+        plot_z, = plt.plot(time, vz, label='z-axis')
         plt.grid(True)
+        plt.legend(handles=[plot_x, plot_y, plot_z])
         plt.savefig('../results/auv/velocities.png')
+        plt.show()
 
         plt.figure()
-        plt.plot(time, v)
+        plt.xlabel('time[s]')
+        plt.ylabel('velocity [m/s]')
+
+        plot_norm, = plt.plot(time, v, label="vector norm")
         plt.grid(True)
+        plt.legend(handles=[plot_norm])
         plt.savefig('../results/auv/velocity_norm.png')
+        plt.show()
 
     @staticmethod
     def plot_acceleration_profiles(trajectory, time):
@@ -163,17 +179,26 @@ class AutonomousUnderwaterVehicle:
         a = np.sqrt(ax ** 2 + ay ** 2 + az ** 2)
 
         plt.figure()
-        plt.plot(time, ax)
-        plt.plot(time, ay)
-        plt.plot(time, az)
+        plt.xlabel('time[s]')
+        plt.ylabel('acceleration [m/s^2]')
 
+        plot_x, = plt.plot(time, ax, label='x-axis')
+        plot_y, = plt.plot(time, ay, label='y-axis')
+        plot_z, = plt.plot(time, az, label='z-axis')
         plt.grid(True)
+        plt.legend(handles=[plot_x, plot_y, plot_z])
         plt.savefig('../results/auv/accelerations.png')
+        plt.show()
 
         plt.figure()
-        plt.plot(time, a)
+        plt.xlabel('time[s]')
+        plt.ylabel('acceleration [m/s^2]')
+
+        plot_norm, = plt.plot(time, a, label="vector norm")
         plt.grid(True)
+        plt.legend(handles=[plot_norm])
         plt.savefig('../results/auv/acceleration_norm.png')
+        plt.show()
 
     @property
     def v_max(self):
