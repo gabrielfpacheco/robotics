@@ -3,14 +3,15 @@ import numpy as np
 
 
 class TrapezoidalProfile:
-    """ This class provides methods and parameters necessary for imposing a velocity trapezoidal profile to a certain
+    """
+    This class provides methods and parameters necessary for imposing a velocity trapezoidal profile to a certain
     object navigating from an initial position to a final one on R3 (x,y,z), solving its kinematic equations and
     providing position for a given instant in time.
-
     """
 
-    def __init__(self, initial_position, final_position, maximum_velocity, constant_acceleration):
-        """ Initializes a trapezoidal profile object an its properties
+    def __init__(self, initial_position=2, final_position=8, maximum_velocity=8, constant_acceleration=4):
+        """
+        Initializes a trapezoidal profile object an its properties
 
         :param initial_position: 3-dimensional vector representing initial position in [m]
         :param final_position: 3-dimensional vector representing desired final position in [m]
@@ -33,9 +34,9 @@ class TrapezoidalProfile:
         self.__set_time_instants()
 
     def __set_time_instants(self):
-        """ Sets the time instants for each phase of the desired profile considering the degenerative case when there is
+        """
+        Sets the time instants for each phase of the desired profile considering the degenerative case when there is
         no constant velocity phase.
-
         """
 
         # Treating degenerative case and adjusting trajectory's minimum displacement and duration
@@ -58,7 +59,8 @@ class TrapezoidalProfile:
         self.__end_time = self.__end_const_velocity_time + self.__minimum_duration / 2
 
     def solve_position_equation(self, time):
-        """ Solves the kinematic equations for each phase of the trapezoidal profile, considering the
+        """
+        Solves the kinematic equations for each phase of the trapezoidal profile, considering the
         constraints in bot velocity and acceleration that a trapezoidal profile imposes.
 
         :param time: time instant in [s] for which the objects position should be calculated
@@ -111,6 +113,14 @@ class TrapezoidalProfile:
     @property
     def start_time(self):
         return self.__start_time
+
+    @property
+    def end_acceleration_time(self):
+        return self.__end_acceleration_time
+
+    @property
+    def end_const_velocity_time(self):
+        return self.__end_const_velocity_time
 
     @property
     def end_time(self):

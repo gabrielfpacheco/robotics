@@ -2,24 +2,24 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
-from trapezoidal_profile import TrapezoidalProfile
+from auv.trapezoidal_profile import TrapezoidalProfile
 
 
 class AutonomousUnderwaterVehicle:
-    """ This class is intended to describe the behavior of an AUV object, containing the methods and properties
+    """
+    This class is intended to describe the behavior of an AUV object, containing the methods and properties
     necessary for it to generate a smooth trajectory through given way-points within a confined space (storage tank)
     respecting an imposed velocity profile.
-
     """
 
     def __init__(self, auv_max_velocity=8, auv_acceleration=4, tank_height=15, tank_radius=10):
-        """ Initializes an AUV object and its properties.
+        """
+        Initializes an AUV object and its properties.
 
         :param auv_max_velocity: maximum translational velocity (in module) achieved by the AUV in [m/s]
         :param auv_acceleration:  constant acceleration (in module) of the AUV in [m/s^2]
         :param tank_height: storage tank's height in [m]
         :param tank_radius: storage tank's radius in [m]
-
         """
 
         self.__auv_max_velocity = auv_max_velocity
@@ -34,12 +34,12 @@ class AutonomousUnderwaterVehicle:
         self.__trajectory = None
 
     def __check_map_boundaries(self, position):
-        """ Checks whether or not a specific point is contained by the map. The storage tank is assumed to be a cylinder
+        """
+         Checks whether or not a specific point is contained by the map. The storage tank is assumed to be a cylinder
         and the origin of the coordinates system is centered on the its base.
 
         :param position: 3-dimensional position vector
         :return: boolean returning True if the point is within limits and False if not
-
         """
 
         is_within_height = position[-1] <= self.__tank_height
@@ -48,7 +48,8 @@ class AutonomousUnderwaterVehicle:
         return is_within_height and is_within_circle
 
     def generate_splines_from_trapezoidal_profile(self, initial_position, final_position, sampling_factor=10):
-        """ Generate splines for the 3 axis from p0 to p1
+        """
+        Generate splines for the 3 axis from p0 to p1
 
         :param initial_position: 3-dimensional position vector representing robot's initial position in [m]
         :param final_position: 3-dimensional position vector representing robot's initial position in [m]
@@ -73,7 +74,7 @@ class AutonomousUnderwaterVehicle:
         time = np.linspace(trapezoidal_profile.start_time, trapezoidal_profile.end_time, number_points)
 
         splines = np.zeros((3, len(time)))
-        for index, t in enumerate(time ):
+        for index, t in enumerate(time):
             splines[:, index] = trapezoidal_profile.solve_position_equation(t)
 
         self.__trajectory = splines
@@ -82,12 +83,14 @@ class AutonomousUnderwaterVehicle:
         return splines, time
 
     @staticmethod
-    def plot_3d_trajectory(trajectory, time):
-        """ Plots an animation of how the AUV's position evolves over time. The acceleration, constant velocity and
+    def plot_3d_trajectory(trajectory, time, show_animation=True):
+        """
+        Plots an animation of how the AUV's position evolves over time. The acceleration, constant velocity and
         deceleration phases can be remarked during the animation.
 
         :param trajectory: sequence of 3-dimensional position data
         :param time: time vector containing the sampled time interval
+        :param show_animation: boolean to indicate if the values need to be plotted
         """
 
         interval = np.diff(time)[0]
@@ -102,20 +105,23 @@ class AutonomousUnderwaterVehicle:
 
         plt.title('3D trajectory over time')
 
-        for index in range(len(time)):
-            ax.plot3D([trajectory[0, 0], trajectory[0, index]], [trajectory[1, 0], trajectory[1, index]],
-                      [trajectory[2, 0], trajectory[2, index]], '--r')
-            plt.draw()
-            plt.pause(interval)
+        if show_animation:
+            for index in range(len(time)):
+                ax.plot3D([trajectory[0, 0], trajectory[0, index]], [trajectory[1, 0], trajectory[1, index]],
+                          [trajectory[2, 0], trajectory[2, index]], '--r')
+                plt.draw()
+                plt.pause(interval)
 
-        plt.show(block=True)
+            plt.show(block=True)
 
     @staticmethod
-    def plot_position_profiles(trajectory, time):
-        """ Plots the position trajectories (splines) over time for each one of the axis.
+    def plot_position_profiles(trajectory, time, show_animation=True):
+        """
+        Plots the position trajectories (splines) over time for each one of the axis.
 
         :param trajectory: sequence of 3-dimensional position data
         :param time: time vector containing the sampled time interval
+        :param show_animation: boolean to indicate if the values need to be plotted
         """
 
         plt.figure()
@@ -127,15 +133,18 @@ class AutonomousUnderwaterVehicle:
         plot_z, = plt.plot(time, trajectory[2], ':.', label='z-axis')
         plt.grid(True)
         plt.legend(handles=[plot_x, plot_y, plot_z])
-        plt.savefig('../results/auv/positions.png')
-        plt.show()
+
+        if show_animation:
+            plt.savefig('./results/auv/positions.png')
+            plt.show()
 
     @staticmethod
-    def plot_velocity_profiles(trajectory, time):
+    def plot_velocity_profiles(trajectory, time, show_animation=True):
         """ Plots the velocity over time for each one of the axis and for their combined velocity (vector norm)
 
         :param trajectory: sequence of 3-dimensional position data
         :param time: time vector containing the sampled time interval
+        :param show_animation: boolean to indicate if the values need to be plotted
         """
 
         vx = calculate_time_derivative(trajectory[0], time)
@@ -152,8 +161,10 @@ class AutonomousUnderwaterVehicle:
         plot_z, = plt.plot(time, vz, label='z-axis')
         plt.grid(True)
         plt.legend(handles=[plot_x, plot_y, plot_z])
-        plt.savefig('../results/auv/velocities.png')
-        plt.show()
+
+        if show_animation:
+            plt.savefig('./results/auv/velocities.png')
+            plt.show()
 
         plt.figure()
         plt.xlabel('time[s]')
@@ -162,15 +173,19 @@ class AutonomousUnderwaterVehicle:
         plot_norm, = plt.plot(time, v, label="vector norm")
         plt.grid(True)
         plt.legend(handles=[plot_norm])
-        plt.savefig('../results/auv/velocity_norm.png')
-        plt.show()
+
+        if show_animation:
+            plt.savefig('./results/auv/velocity_norm.png')
+            plt.show()
 
     @staticmethod
-    def plot_acceleration_profiles(trajectory, time):
-        """ Plots the acceleration over time for each one of the axis and for their combined acceleration (vector norm)
+    def plot_acceleration_profiles(trajectory, time, show_animation=True):
+        """
+        Plots the acceleration over time for each one of the axis and for their combined acceleration (vector norm)
 
         :param trajectory: sequence of 3-dimensional position data
         :param time: time vector containing the sampled time interval
+        :param show_animation: boolean to indicate if the values need to be plotted
         """
 
         ax = calculate_time_derivative(calculate_time_derivative(trajectory[0], time), time)
@@ -187,8 +202,10 @@ class AutonomousUnderwaterVehicle:
         plot_z, = plt.plot(time, az, label='z-axis')
         plt.grid(True)
         plt.legend(handles=[plot_x, plot_y, plot_z])
-        plt.savefig('../results/auv/accelerations.png')
-        plt.show()
+
+        if show_animation:
+            plt.savefig('./results/auv/accelerations.png')
+            plt.show()
 
         plt.figure()
         plt.xlabel('time[s]')
@@ -197,8 +214,10 @@ class AutonomousUnderwaterVehicle:
         plot_norm, = plt.plot(time, a, label="vector norm")
         plt.grid(True)
         plt.legend(handles=[plot_norm])
-        plt.savefig('../results/auv/acceleration_norm.png')
-        plt.show()
+
+        if show_animation:
+            plt.savefig('./results/auv/acceleration_norm.png')
+            plt.show()
 
     @property
     def v_max(self):

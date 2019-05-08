@@ -17,7 +17,7 @@ The goal is to evolve this repository with new algorithms and applications for d
 
     > git clone https://github.com/gabrielfpacheco/robotics.git
 
-    > cd robotics/auv/
+    > cd robotics/
 
 2. Install the required libraries. You can use environment.yml with conda command. If Windows, do it from 
 Anaconda Prompt
@@ -28,11 +28,13 @@ Anaconda Prompt
     
     > conda activate robotics
 
-4. Execute the main.py script inside the directory.
+4. Execute the unit tests and check if every test is being passed.
+
+    > python unit_tests.py
+
+5. Execute the main.py script inside the directory.
 
     > python main.py
-
-5. The unit tests will be performed and an example will be plotted.
 
 
 # Results
