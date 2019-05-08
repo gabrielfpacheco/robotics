@@ -125,8 +125,8 @@ class AutonomousUnderwaterVehicle:
                 plt.pause(interval)
 
             plt.show(block=True)
-            ani = animation.ArtistAnimation(fig, images, interval=interval, blit=True, repeat_delay=1000)
-            ani.save('.results/auv/3d_position.html', writer='html')
+            # ani = animation.ArtistAnimation(fig, images, interval=interval, blit=True, repeat_delay=1000)
+            # ani.save('.results/auv/3d_position.html', writer='html')
 
     @staticmethod
     def plot_position_profiles(trajectory, time, show_animation=True):
