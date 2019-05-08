@@ -6,6 +6,7 @@ __pycache__/
 *$py.class
 _build/
 .idea/
+.results/
 
 # C extensions
 *.so
