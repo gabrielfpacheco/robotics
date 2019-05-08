@@ -2,6 +2,7 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.animation as animation
 from auv.trapezoidal_profile import TrapezoidalProfile
 
 
@@ -93,7 +94,7 @@ class AutonomousUnderwaterVehicle:
         """
 
         interval = np.diff(time)[0]
-        plt.figure()
+        fig = plt.figure()
         ax = plt.axes(projection='3d')
         ax.scatter3D(trajectory[0, 0], trajectory[1, 0], trajectory[2, 0], 'o')
         ax.scatter3D(trajectory[0, -1], trajectory[1, -1], trajectory[2, -1], 'o')
@@ -115,13 +116,17 @@ class AutonomousUnderwaterVehicle:
         plt.ylim(-self.__tank_radius*1.5, self.__tank_radius*1.5)
 
         if show_animation:
+            images = []
             for index in range(len(time)):
-                ax.plot3D([trajectory[0, 0], trajectory[0, index]], [trajectory[1, 0], trajectory[1, index]],
-                          [trajectory[2, 0], trajectory[2, index]], '--r')
+                images.append(ax.plot3D([trajectory[0, 0], trajectory[0, index]],
+                                        [trajectory[1, 0], trajectory[1, index]],
+                                        [trajectory[2, 0], trajectory[2, index]], '--r'))
                 plt.draw()
                 plt.pause(interval)
 
             plt.show(block=True)
+            ani = animation.ArtistAnimation(fig, images, interval=interval, blit=True, repeat_delay=1000)
+            ani.save('.results/auv/3d_position.html', writer='html')
 
     @staticmethod
     def plot_position_profiles(trajectory, time, show_animation=True):
